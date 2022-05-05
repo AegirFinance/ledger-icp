@@ -666,15 +666,17 @@ parser_error_t parser_getItemAddRemoveHotkey(uint8_t displayIdx,
         snprintf(outKey, outKeyLen, "Principal ");
         if (parser_tx_obj.tx_fields.call.manage_neuron_type == AddHotKey) {
             PARSER_ASSERT_OR_ERROR(fields->command.configure.operation.add_hot_key.has_new_hot_key, parser_unexpected_number_items);
-            PARSER_ASSERT_OR_ERROR(fields->command.configure.operation.add_hot_key.new_hot_key.serialized_id.size <= 29,
+            PARSER_ASSERT_OR_ERROR(fields->command.configure.operation.add_hot_key.new_hot_key.serialized_id.size <= 27,
                                    parser_value_out_of_range);
-            return print_textual(fields->command.configure.operation.add_hot_key.new_hot_key.serialized_id.bytes, 29,
+            return print_textual(fields->command.configure.operation.add_hot_key.new_hot_key.serialized_id.bytes,
+                                 fields->command.configure.operation.add_hot_key.new_hot_key.serialized_id.size,
                                  outVal, outValLen, pageIdx, pageCount);
         }else{
             PARSER_ASSERT_OR_ERROR(fields->command.configure.operation.remove_hot_key.has_hot_key_to_remove, parser_unexpected_number_items);
-            PARSER_ASSERT_OR_ERROR(fields->command.configure.operation.remove_hot_key.hot_key_to_remove.serialized_id.size <= 29,
+            PARSER_ASSERT_OR_ERROR(fields->command.configure.operation.remove_hot_key.hot_key_to_remove.serialized_id.size <= 27,
                                    parser_value_out_of_range);
-            return print_textual(fields->command.configure.operation.remove_hot_key.hot_key_to_remove.serialized_id.bytes, 29,
+            return print_textual(fields->command.configure.operation.remove_hot_key.hot_key_to_remove.serialized_id.bytes,
+                                 fields->command.configure.operation.remove_hot_key.hot_key_to_remove.serialized_id.bytes,
                                  outVal, outValLen, pageIdx, pageCount);
         }
     }
